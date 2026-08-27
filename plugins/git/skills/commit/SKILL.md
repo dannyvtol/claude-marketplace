@@ -1,5 +1,5 @@
 ---
-name: git-commit
+name: commit
 description: commit changes as conventional commits, sliced by logical concern
 ---
 # Git commit

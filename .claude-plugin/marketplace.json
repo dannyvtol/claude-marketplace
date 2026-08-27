@@ -6,12 +6,12 @@
   },
   "plugins": [
     {
-      "name": "conventional-commits",
-      "source": "./plugins/conventional-commits",
+      "name": "git",
+      "source": "./plugins/git",
       "description": "Adding human and machine readable meaning to commit messages",
       "version": "0.2.0",
       "author": {
-        "name": "Danny van Tol"
+        "name": "Danny van Tol:"
       }
     }
   ]

@@ -1,0 +1,8 @@
+{
+  "name": "git",
+  "description": "commit changes as conventional commits, sliced by logical concern",
+  "version": "0.2.0",
+  "author": {
+    "name": "Danny van Tol"
+  }
+}
