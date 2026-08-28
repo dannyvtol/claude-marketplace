@@ -8,8 +8,8 @@
     {
       "name": "git",
       "source": "./plugins/git",
-      "description": "Adding human and machine readable meaning to commit messages",
-      "version": "0.2.0",
+      "description": "commit changes as conventional commits, sliced by logical concern",
+      "version": "0.3.0",
       "author": {
         "name": "Danny van Tol"
       }
