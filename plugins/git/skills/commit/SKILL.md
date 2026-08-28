@@ -11,7 +11,7 @@ A **slice** is one logical concern — a feature, fix, or refactor — regardles
 3. For each slice:
    1. Stage its changes: `git add -p` for partial files, `git add <file>` for whole files.
    2. Identify scope (priority: issue # → module → component; omit if none applies).
-   3. Write a commit message per `## Format` and `## Rules`.
+   3. Write a commit message per `## Format`.
    4. `git commit`
 4. Repeat until `git status --porcelain` is empty.
 
@@ -20,26 +20,13 @@ A **slice** is one logical concern — a feature, fix, or refactor — regardles
 ```
 <type>(<optional scope>): <short imperative description>
 
-[optional body explaining *what* and *why*]
+[optional body: what and why]
 
 [optional footer]
 ```
 
-## Types
+**Types:** `feat` · `fix` · `test` · `style` · `refactor` · `chore` · `docs` · `ci` · `perf`
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `test`: Tests
-- `style`: Formatting, no logic change
-- `refactor`: Restructuring only
-- `chore`: Build, tooling, deps
-- `docs`: Documentation
-- `ci`: CI/CD
+**Scope examples:** `feat(#42)` (issue) · `feat(auth)` (module) · `feat(button)` (component)
 
-## Rules
-
-- Type + description: **required**
-- Scope: optional; `feat(#42): ...` (issue), `feat(auth): ...` (module), `feat(button): ...` (component)
-- Breaking change: add `!` before `:` → `feat!: ...`
-- Breaking change footer: `BREAKING CHANGE: <description>`
-- Body/footers separated from description by one blank line
+**Breaking change:** `feat!: ...` + footer `BREAKING CHANGE: <description>`
