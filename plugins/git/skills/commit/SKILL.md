@@ -10,7 +10,12 @@ A **slice** is one logical concern — a feature, fix, or refactor — regardles
 2. Identify slices. Every hunk must belong to exactly one slice.
 3. For each slice:
    1. Stage its changes: `git add -p` for partial files, `git add <file>` for whole files.
-   2. Identify scope (priority: issue # → module → component; omit if none applies).
+   2. Identify scope:
+      - Look for an external issue tracker reference (GitHub, Jira, Linear, …) in branch name, PR title, or commit context. Local file paths do not qualify.
+      - Found → use issue as scope.
+      - Not found → ask: "Does this relate to an external issue? Provide the number or `none`." Wait for the answer.
+        - Number given → use it.
+        - `none` → use module → component; omit if neither applies.
    3. Write a commit message per `## Format`.
    4. `git commit`
 4. Repeat until `git status --porcelain` is empty.
@@ -27,6 +32,6 @@ A **slice** is one logical concern — a feature, fix, or refactor — regardles
 
 **Types:** `feat` · `fix` · `test` · `style` · `refactor` · `chore` · `docs` · `ci` · `perf`
 
-**Scope examples:** `feat(#42)` (issue) · `feat(auth)` (module) · `feat(button)` (component)
+**Scope examples:** `feat(#42)` (external issue) · `feat(auth)` (module) · `feat(button)` (component)
 
 **Breaking change:** `feat!: ...` + footer `BREAKING CHANGE: <description>`
