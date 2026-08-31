@@ -9,7 +9,7 @@
       "name": "git",
       "source": "./plugins/git",
       "description": "commit changes as conventional commits, sliced by logical concern",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "author": {
         "name": "Danny van Tol"
       }
