@@ -6,19 +6,19 @@ description: commit changes as conventional commits, sliced by logical concern
 
 A **slice** is one logical concern — a feature, fix, or refactor — regardless of how many files it touches. One file may yield multiple slices.
 
-1. Identify scope, once, before slicing. Check sources in order, stop at the first hit:
-   1. Branch name.
-   2. PR title, if a PR exists for this branch.
-   3. Previous commits on this branch, only if it has commits beyond its base (`git log <base>..HEAD`).
-   - Hit → external issue reference (GitHub, Jira, Linear, …) is the scope for every commit this session: `<type>(<issue>): ...`. It replaces module/component — never both, never appended after the description.
-   - No hit, or the reference is unreliable → ask: "Does this relate to an external issue? Provide the number, or `none`." Wait for the answer.
-     - Number given → use it as the scope, as above.
-     - `none` → no shared scope; fall back to module/component per slice (step 4.2).
+1. **Lock the scope** once, before slicing. Run `git branch --show-current`, then check in order, stop at the first hit:
+   1. **Branch name** — extract the issue key: `feat/2-scaffold` → `#2`; `fix/PROJ-123-foo` → `PROJ-123`. A bare number is a GitHub issue (`#N`); an alphanumeric key is a tracker ID.
+   2. **PR title** — `gh pr view --json title`, if a PR exists for this branch.
+   3. **Prior commits** — `git log <base>..HEAD`, only when commits exist beyond the base.
+   - **Hit** → the issue key is the **locked scope** for every commit this session. Format: `<type>(<issue>): ...`. The issue key is the complete scope; drop module/component.
+   - **No hit** → ask: "Does this relate to an external issue? Provide the number, or `none`." Wait for the answer.
+     - Number given → lock it as scope, as above.
+     - `none` → no locked scope; derive scope per slice in step 4.2.
 2. Run `git status --porcelain` and `git diff HEAD` to survey all changes.
 3. Identify slices. Every hunk must belong to exactly one slice.
 4. For each slice:
    1. Stage its changes: `git add -p` for partial files, `git add <file>` for whole files.
-   2. No shared scope from step 1 → scope is module → component; omit if neither applies.
+   2. Scope: use the locked scope from step 1; if none, use module → component; omit if neither applies.
    3. Write a commit message per `## Format`.
    4. `git commit`
 5. Repeat until `git status --porcelain` is empty.
@@ -35,6 +35,6 @@ A **slice** is one logical concern — a feature, fix, or refactor — regardles
 
 **Types:** `feat` · `fix` · `test` · `style` · `refactor` · `chore` · `docs` · `ci` · `perf`
 
-**Scope examples:** `feat(IT-32998): add optional digidocId to SaveInterestOnlyDigidocJob` (external issue — takes priority) · `feat(auth): ...` (module, no issue) · `feat(button): ...` (component, no issue)
+**Scope examples:** `feat(#2): ...` (locked scope, GitHub) · `feat(IT-32998): add optional digidocId to SaveInterestOnlyDigidocJob` (locked scope, Jira) · `feat(auth): ...` (module) · `feat(button): ...` (component)
 
 **Breaking change:** `feat!: ...` + footer `BREAKING CHANGE: <description>`
